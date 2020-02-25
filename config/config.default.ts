@@ -4,6 +4,11 @@ import travelHotelTable from '../app/schema/table_travel_hotel';
 import logisticalTable from '../app/schema/table_logistical';
 import donationTable from '../app/schema/table_donation';
 import clinicTable from '../app/schema/table_clinic';
+import enterpriseDonationTable from '../app/schema/table_enterprise_donation';
+import factoryTable from '../app/schema/table_factory';
+import doctorHotelTable from '../app/schema/table_doctor_hotel';
+import patientDetailTable from '../app/schema/table_patient_detail';
+import isaaclinApi from '../app/external_api/api_isaaclin';
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
@@ -57,6 +62,23 @@ export default (appInfo: EggAppInfo) => {
       logisticalTable,
       donationTable,
       clinicTable,
+      enterpriseDonationTable,
+      factoryTable,
+      doctorHotelTable,
+      patientDetailTable,
+    ],
+  };
+
+  config.qiniu = {
+    enable: false,
+    accessKey: 'YOUR ACCESSKEY',
+    secretKey: 'YOUR SECRETKEY',
+    bucket: 'BUCKET',
+  };
+
+  config.api = {
+    apis: [
+      isaaclinApi,
     ],
   };
 
@@ -69,6 +91,16 @@ export default (appInfo: EggAppInfo) => {
   // Baidu Map API Key
   config.baidu = {
     api_key: 'YOUR BAIDU MAP API KEY',
+  };
+
+  config.datacache = {
+    client: {},
+    app: true,
+    agent: false,
+  };
+
+  config.patientTrack = {
+    client: {},
   };
 
   // the return config will combines to EggAppConfig

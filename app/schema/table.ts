@@ -1,3 +1,5 @@
+import { Context } from 'egg';
+
 export interface PreTableConfig {
   guid: string;
   sheets: string[];
@@ -15,7 +17,7 @@ export interface TableConfig extends PreTableConfig {
   indexKey: string;
   validation?: (row: any[]) => boolean;
   getFilePath: (sheet: string) => string;
-  feParser?: (data: any[], sheet: string) => any;
+  feParser?: (data: any[], sheet: string, ctx: Context) => Promise<any>;
 }
 
 export function getCellByType(row: any[], type: ColumnTypes): any {
@@ -36,7 +38,7 @@ export const defaultValidation = (row: any[]): boolean => {
   return v !== null && !v.includes('未');
 };
 
-export type ColumnTypes = 'string' | 'int' | 'float' | 'url' | 'address' | 'enum' | 'supply' | 'contact' | 'date';
+export type ColumnTypes = 'string' | 'int' | 'float' | 'url' | 'address' | 'enum' | 'supply' | 'contact' | 'date' | 'supplies';
 
 export interface TableData {
   guid: string;
